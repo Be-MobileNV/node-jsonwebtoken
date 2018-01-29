@@ -16,7 +16,7 @@ var sign_options_schema = {
   algorithm: { isValid: includes.bind(null, ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'none']), message: '"algorithm" must be a valid string enum value' },
   header: { isValid: isPlainObject, message: '"header" must be an object' },
   encoding: { isValid: isString, message: '"encoding" must be a string' },
-  issuer: { isValid: isString, message: '"issuer" must be a string' },
+  issuer: { isValid: function(value) { return isPlainObject(value) || isString(value); }, message: '"issuer" must be a string' },
   subject: { isValid: isString, message: '"subject" must be a string' },
   jwtid: { isValid: isString, message: '"jwtid" must be a string' },
   noTimestamp: { isValid: isBoolean, message: '"noTimestamp" must be a boolean' },
